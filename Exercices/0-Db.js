@@ -17,3 +17,26 @@
  *
  * Si lo pueden separar será un plus!
  **/
+
+const MoviesSchema = require('./0-DbSchema')
+const { connection, connect, model } = require('mongoose')
+
+const uri =
+  'mongodb+srv://jasmo2:2WcZnRewKnyFhrMu@cluster0-2culb.mongodb.net/movies?retryWrites=true&w=majority'
+
+function init() {
+  connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+
+  connection.on('error', console.error.bind(console, 'connection error:'))
+
+  connection.once('open', function(params) {
+    console.log('Connected -> DB', params, uri)
+  })
+
+  const Movies = model('Movies', MoviesSchema)
+}
+
+init()
