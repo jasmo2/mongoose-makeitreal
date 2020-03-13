@@ -20,9 +20,9 @@
 
 const MoviesSchema = require('./0-DbSchema')
 const { connection, connect, model } = require('mongoose')
+require('dotenv').config()
 
-const uri =
-  'mongodb+srv://jasmo2:2WcZnRewKnyFhrMu@cluster0-2culb.mongodb.net/movies?retryWrites=true&w=majority'
+const uri = `mongodb+srv://jasmo2:${process.env.DB_TOKEN}@cluster0-2culb.mongodb.net/movies?retryWrites=true&w=majority`
 
 function init() {
   connect(uri, {
