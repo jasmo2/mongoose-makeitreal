@@ -6,9 +6,13 @@
 const mongoose = require('mongoose')
 const kittySchema = require('./0-Db-B')
 const init = () => {
-  mongoose.connect('mongodb://localhost/cats', {
-    useUnifiedTopology: true
-  })
+  // mongoose.connect('mongodb://localhost/cats', {
+  mongoose.connect(
+    'mongodb+srv://jasmo2:2WcZnRewKnyFhrMu@cluster0-2culb.mongodb.net/cats?retryWrites=true&w=majority',
+    {
+      useUnifiedTopology: true
+    }
+  )
 
   const Kitten = mongoose.model('Kitten', kittySchema)
 
@@ -18,6 +22,7 @@ const init = () => {
     name: 'fluffy',
     size: 3
   })
+
   fluffy.save((err, fluffy) => {
     if (err) return console.error(err)
     console.log('Pre speak')

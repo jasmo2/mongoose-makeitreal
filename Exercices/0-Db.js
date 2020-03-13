@@ -24,19 +24,17 @@ require('dotenv').config()
 
 const uri = `mongodb+srv://jasmo2:${process.env.DB_TOKEN}@cluster0-2culb.mongodb.net/movies?retryWrites=true&w=majority`
 
-function init() {
-  connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
+connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
 
-  connection.on('error', console.error.bind(console, 'connection error:'))
+connection.on('error', console.error.bind(console, 'connection error:'))
 
-  connection.once('open', function(params) {
-    console.log('Connected -> DB', params, uri)
-  })
+connection.once('open', function(params) {
+  console.log('Connected -> DB', params, uri)
+})
 
-  const Movies = model('Movies', MoviesSchema)
-}
+const Movies = model('Movies', MoviesSchema)
 
-init()
+module.exports = Movies
