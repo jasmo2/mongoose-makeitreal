@@ -7,7 +7,7 @@ const kittySchema = require('./0-Db-B')
 const init = async () => {
   mongoose.connect('mongodb://localhost/cats', {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   })
 
   const Kitten = mongoose.model('Kitten', kittySchema)
@@ -24,8 +24,8 @@ const init = async () => {
     console.log('---------------------------')
 
     const kitten2 = await Kitten.updateMany(
-      { name: 'Nombre nuevo' }, // QUERY para mongoose
-      { $set: {} } //Elemento al que se va a reemplazar
+      { name: 'Kual' }, // QUERY para mongoose
+      { $set: { breed: 'home cats' } } //Elemento al que se va a reemplazar
     )
     console.log('TCL: init -> kitten2', kitten2)
   } catch (error) {
