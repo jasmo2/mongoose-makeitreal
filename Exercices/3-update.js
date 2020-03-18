@@ -23,24 +23,29 @@ const init = async () => {
         },
       }
     })
-
+    console.log('TCL: init -> bulkQueries', bulkQueries)
     const bulkResult = await Movies.bulkWrite(bulkQueries)
     console.log('TCL: init -> bulkResult', bulkResult)
     // console.log('TCL: init -> queryResult', queryResult)
 
     // Forma B
-
     /* Para este lado coger el substring 
-          `const additionalText = ' - ultimas 50'`
-          de las últimas 50 anteriosmente actualizadas y cambiarlas por 
-          `const newText =  ' last fifty'`
-    */
-    // const movies = await Movies.find({ rank: { $gte: 50 } })
-    // for (let index = 0; index < movies.length; index++) {
-    //   const movie = movies[index]
-    //   movie.title = movie.title + additionalText
-    //   await movie.save()
-    // }
+                                                          `const additionalText = ' - ultimas 50 - ultimas 50'`
+                                                          de las últimas 50 anteriosmente actualizadas y cambiarlas por 
+                                                          `const newText =  ' last fifty'`
+                                                    */
+    // substring()
+    const movies = await Movies.find({ rank: { $gte: 50 } })
+    for (let index = 0; index < movies.length; index++) {
+      const movie = movies[index]
+      const subStr = movie.title.substring(
+        0,
+        movie.title.indexOf(' - ultimas 50 - ultimas 50')
+      )
+      const newText = ' last fifty'
+      movie.title = `${subStr}${newText}`
+      await movie.save()
+    }
 
     // console.log('TCL: init -> movies', movies)
   } catch (error) {

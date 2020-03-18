@@ -34,9 +34,9 @@ Movies.find({ rank: { $lte: 10 } }, (err, movies) => {
     console.error(err)
   }
 
-  const shortenMovies = movies.map(movie => ({
+  const shortenMovies = movies.map((movie) => ({
     title: movie.title,
-    rank: movie.rank
+    rank: movie.rank,
   }))
   console.log('TCL: find => movies', shortenMovies)
 })
@@ -50,9 +50,9 @@ Movies.find(
       console.error(err)
     }
 
-    const shortenMovies = movies.map(movie => ({
+    const shortenMovies = movies.map((movie) => ({
       title: movie.title,
-      rank: movie.rank
+      rank: movie.rank,
     }))
     console.log('TCL: find => movies', shortenMovies)
   }
